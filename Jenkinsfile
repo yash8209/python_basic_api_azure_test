@@ -9,12 +9,15 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'master', url: 'https://github.com/khushboo-289/python-application.git'
+                git branch: 'main', url: 'https://github.com/khushboo-289/python-application.git'
             }
         }
 
         stage('Setup Python') {
             steps {
+                script {
+                    env.PATH = "C:\\Python311;C:\\Python311\\Scripts;${env.PATH}"
+                }
                 bat 'python --version'
             }
         }
@@ -25,11 +28,12 @@ pipeline {
             }
         }
 
-       
-
         stage('Package Application') {
             steps {
-                bat 'powershell Compress-Archive -Path * -DestinationPath app.zip -Force'
+                bat '''
+                    powershell Remove-Item -Path app.zip -ErrorAction Ignore
+                    powershell Compress-Archive -Path * -DestinationPath app.zip
+                '''
             }
         }
 
