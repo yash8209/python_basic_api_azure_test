@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        AZURE_CREDENTIALS_ID = 'azure-service-principal'
+        AZURE_CREDENTIALS_ID = 'python-azure-principle'
         RESOURCE_GROUP = 'yashp_resource1'
         APP_SERVICE_NAME = 'myPythonAppyashp1'
     }
