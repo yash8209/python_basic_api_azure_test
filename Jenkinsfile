@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'master', url: ''
+                git branch: 'master', url: 'https://github.com/yash8209/python_basic_api_azure_test.git'
             }
         }
 
