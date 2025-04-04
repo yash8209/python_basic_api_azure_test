@@ -16,7 +16,7 @@ pipeline {
         stage('Setup Python') {
             steps {
                 script {
-                    env.PATH = "C:\\Python311;C:\\Python311\\Scripts;${env.PATH}"
+                    env.PATH = "C:\Users\y5948\AppData\Local\Programs\Python\Python312\python.exe"
                 }
                 bat 'python --version'
             }
