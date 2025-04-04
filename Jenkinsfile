@@ -17,7 +17,9 @@ pipeline {
         stage('Set Up Python Environment') {
             steps {
                 bat 'python -m venv venv'
-                bat '.\\venv\\Scripts\\activate && pip install -r requirements.txt'
+                bat 'pip install fastapi'
+                bat 'pip install uvicorn'
+                bat 'pip install pytest'
             }
         }
 
