@@ -14,15 +14,16 @@ pipeline {
             }
         }
 
-        stage('Setup Python') {
-            steps {
-                script {
-                    def pythonHome = tool name: 'Python3', type: 'hudson.tasks.Maven$MavenInstallation'
-                    env.PATH = "${pythonHome}/bin:${env.PATH}"
-                }
-                sh 'python --version'
-            }
+       stage('Setup Python') {
+    steps {
+        script {
+            def pythonHome = tool name: 'Python3', type: 'hudson.tools.Installation' // Correct Type
+            env.PATH = "${pythonHome}/bin:${env.PATH}"
         }
+        sh 'python3 --version'  // Use 'python' for Windows
+    }
+}
+
 
         stage('Install Dependencies') {
             steps {
