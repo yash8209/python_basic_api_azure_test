@@ -15,7 +15,9 @@ pipeline {
 
         stage('Setup Python') {
             steps {
-                bat 'python --version'
+                bat 'python fastapi'
+                bat 'python uvicorn'
+                bat 'python pytest'
             }
         }
 
