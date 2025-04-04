@@ -4,6 +4,7 @@ pipeline {
         AZURE_CREDENTIALS_ID = 'python-azure-principle'
         RESOURCE_GROUP = 'yashp_resource1'
         APP_SERVICE_NAME = 'myPythonAppyashp1'
+        PYTHON = tool 'Python3'
     }
 
     stages {
