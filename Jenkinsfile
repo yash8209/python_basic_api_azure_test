@@ -15,15 +15,15 @@ pipeline {
 
         stage('Setup Python') {
             steps {
-                bat 'python fastapi'
-                bat 'python uvicorn'
-                bat 'python pytest'
+                bat 'python --version'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'pip install -r requirements.txt'
+                bat 'pip install fastapi'
+                bat 'pip install uvicorn'
+                bat 'pip install pytest'
             }
         }
 
