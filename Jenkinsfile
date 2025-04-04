@@ -17,7 +17,6 @@ pipeline {
         stage('Set Up Python Environment') {
             steps {
                 bat 'python -m venv venv'
-                bat '.\\venv\\Scripts\\activate && pip install --upgrade pip'
                 bat '.\\venv\\Scripts\\activate && pip install -r requirements.txt'
             }
         }
