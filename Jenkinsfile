@@ -13,15 +13,7 @@ pipeline {
             }
         }
 
-        stage('Setup Python') {
-    steps {
-        bat '''
-            echo %PATH%
-            where python
-            python --version
-        '''
-    }
-}
+       
 
 
         stage('Install Dependencies') {
