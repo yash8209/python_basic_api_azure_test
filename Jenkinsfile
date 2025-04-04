@@ -3,18 +3,21 @@ pipeline {
     environment {
         AZURE_CREDENTIALS_ID = 'python-azure-principle'
         RESOURCE_GROUP = 'yashp_resource1'
-        APP_SERVICE_NAME = 'myPythonAppyashp1'
+        APP_SERVICE_NAME = 'myPythonAppyashp1
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/yash8209/python_basic_api_azure_test.git'
+                git branch: 'master', url: 'https://github.com/yash8209/python_basic_api_azure_test.git'
             }
         }
 
-       
-
+        stage('Setup Python') {
+            steps {
+                bat 'python --version'
+            }
+        }
 
         stage('Install Dependencies') {
             steps {
@@ -22,12 +25,11 @@ pipeline {
             }
         }
 
+       
+
         stage('Package Application') {
             steps {
-                bat '''
-                    powershell Remove-Item -Path app.zip -ErrorAction Ignore
-                    powershell Compress-Archive -Path * -DestinationPath app.zip
-                '''
+                bat 'powershell Compress-Archive -Path * -DestinationPath app.zip -Force'
             }
         }
 
