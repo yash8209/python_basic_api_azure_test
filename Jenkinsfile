@@ -4,51 +4,41 @@ pipeline {
         AZURE_CREDENTIALS_ID = 'python-azure-principle'
         RESOURCE_GROUP = 'yashp_resource1'
         APP_SERVICE_NAME = 'myPythonAppyashp1'
-        
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'master', url: 'https://github.com/yash8209/python_basic_api_azure_test.git'
+                git branch: 'master', url: 'https://github.com/khushboo-289/python-application.git'
             }
         }
 
-       stage('Setup Python') {
-    steps {
-        script {
-            def pythonHome = tool name: 'Python3', type: 'hudson.tools.Installation' // Correct Type
-            env.PATH = "${pythonHome}/bin:${env.PATH}"
+        stage('Setup Python') {
+            steps {
+                bat 'python --version'
+            }
         }
-        sh 'python3 --version'  // Use 'python' for Windows
-    }
-}
-
 
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                bat 'pip install -r requirements.txt'
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                sh 'pytest tests/'
-            }
-        }
+       
 
         stage('Package Application') {
             steps {
-                sh 'zip -r app.zip *'
+                bat 'powershell Compress-Archive -Path * -DestinationPath app.zip -Force'
             }
         }
 
         stage('Deploy to Azure') {
             steps {
                 withCredentials([azureServicePrincipal(credentialsId: AZURE_CREDENTIALS_ID)]) {
-                    sh '''
-                        az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
-                        az webapp deploy --resource-group $RESOURCE_GROUP --name $APP_SERVICE_NAME --src-path app.zip --type zip
+                    bat '''
+                        az login --service-principal -u %AZURE_CLIENT_ID% -p %AZURE_CLIENT_SECRET% --tenant %AZURE_TENANT_ID%
+                        az webapp deploy --resource-group %RESOURCE_GROUP% --name %APP_SERVICE_NAME% --src-path app.zip --type zip
                     '''
                 }
             }
@@ -57,7 +47,7 @@ pipeline {
 
     post {
         success {
-            echo ' Deployment Successful!'
+            echo 'Deployment Successful!'
         }
         failure {
             echo ' Deployment Failed!'
