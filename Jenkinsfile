@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         AZURE_CREDENTIALS_ID = 'python-azure-principle'
-        RESOURCE_GROUP = 'yashp_resource1'
+        RESOURCE_GROUP = 'myPythonAppyashp1_group'
         APP_SERVICE_NAME = 'myPythonAppyashp1'
     }
 
